@@ -75,12 +75,26 @@ jobs:
           at: ~/
       - run: cat ~/output.txt
   
+  # Reusing 'print_pipeline_id' commands in job
   print_workflow_id:
     docker:
       - image: cimg/ruby:3.1.0
     executor: ruby/default
     steps:
       - print_pipeline_id
+
+  # Testing failure and run another step on_fail
+  test_failure:
+    docker:
+      - image: cimg/ruby:3.1.0
+    executor: ruby/default
+    steps:
+      - checkout
+      - run: exit 1
+      - run:
+          name: on error
+          command: echo "Hello Error!!!"
+          when: on_fail
 
 
   # Created this job to test environment varaible for authentication
@@ -131,4 +145,5 @@ workflows:
           requires:
             - save_hello_world_output
       - print_workflow_id
+      - test_failure
       - test_auth
