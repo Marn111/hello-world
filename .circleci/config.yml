@@ -56,3 +56,4 @@ workflows:
     jobs:
       - build
       - print_hello
+      - test_auth
