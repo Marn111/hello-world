@@ -38,6 +38,17 @@ jobs:
       - run: echo "World!!!"
       - run: sleep 15
 
+  print_env_var:
+    docker:
+      - image: cimg/ruby:3.1.0
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+        name: 'My environment variable'
+        command: |
+          echo $MY_ENV_VAR
+
   test_auth:
     docker:
       - image: cimg/ruby:3.1.0
@@ -68,4 +79,5 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - print_env_var
       - test_auth
