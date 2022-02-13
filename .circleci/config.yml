@@ -75,6 +75,14 @@ jobs:
           at: ~/
       - run: cat ~/output.txt
   
+  print_workflow_id:
+    docker:
+      - image: cimg/ruby:3.1.0
+    executor: ruby/default
+    steps:
+      - print_pipeline_id
+
+
   # Created this job to test environment varaible for authentication
   test_auth:
     docker:
@@ -95,6 +103,17 @@ jobs:
           paths:
             - echo-output
 
+commands:
+  print_pipeline_id:
+    description: "A very simple command to print out pipeline id"
+    parameters:
+      to:
+        type: string
+        default: echo $CIRCLE_WORKFLOW_ID
+    steps:
+      - run: echo << parameters.to >>
+
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -111,4 +130,5 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
+      - print_workflow_id
       - test_auth
