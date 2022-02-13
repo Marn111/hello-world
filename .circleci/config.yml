@@ -17,8 +17,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Which bundler?
-        command: bundle -v || bundle-install
+          name: Which bundler?
+          command: bundle -v || bundle-install
 
   # Print out simple output
   print_hello:
@@ -48,8 +48,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: 'My environment variable'
-        command: echo $MY_ENV_VAR
+          name: 'My environment variable'
+          command: echo $MY_ENV_VAR
   
   # Saving output text in a file
   save_hello_world_output:
