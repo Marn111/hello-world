@@ -13,6 +13,9 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:3.1.0
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
     executor: ruby/default
     steps:
       - checkout
@@ -23,6 +26,9 @@ jobs:
   print_hello:
     docker:
       - image: cimg/ruby:3.1.0
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
     executor: ruby/default
     steps:
       - checkout
